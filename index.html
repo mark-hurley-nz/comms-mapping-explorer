@@ -167,7 +167,7 @@
         <span class="sub">held per contact, per entity</span>
       </div>
       <div class="card-b" style="overflow-x:auto" id="tier1Body"></div>
-      <div class="tier-note">Each contact's own selection of the four email categories for this entity. Contacts migrated with a placeholder email have every category off — nothing is ever sent to a placeholder address.</div>
+      <div class="tier-note">Boardroom settings are mapped onto the primary contact only — secondary contacts start with every category off, and the registry team can switch any individual on at any time. Placeholder-email contacts are always off.</div>
     </div>
 
     <div class="card tier" id="tier2">
@@ -186,13 +186,13 @@
         <span class="sub">held on the person, across all their entities</span>
       </div>
       <div class="card-b" style="overflow-x:auto" id="tier3Body"></div>
-      <div class="tier-note">Portal Access &amp; Compliance is locked on for everyone — password resets, security and AML/KYC notices cannot be turned off. Marketing is toggleable, and investors can unsubscribe themselves in one click from any marketing email.</div>
+      <div class="tier-note">Portal Access &amp; Compliance is locked on for everyone — password resets, security and AML/KYC notices cannot be turned off. The Marketing list starts on for every contact at migration (the platform default); investors can unsubscribe themselves in one click from any marketing email.</div>
     </div>
   </div>
 </main>
 
 <footer>
-  <p>This explorer mirrors the migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i>. The result on day one mirrors Boardroom: everyone keeps the emails they receive today, each entity keeps its single postal copy, and every Annual Report and Marketing opt-out is preserved.</p>
+  <p>This explorer mirrors the migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i>. On day one the primary contact receives the entity's emails as mapped from Boardroom, secondary contacts start switched off (any individual can be enabled at any time), every contact starts on the Marketing list, and post mirrors Boardroom exactly — a single copy per entity.</p>
   <p>Categories: Orders &amp; Holding Movements · Distributions · Holding &amp; Tax Statements · Updates &amp; Reports (+ Marketing, post-only, on the postal list).</p>
 </footer>
 
@@ -302,8 +302,9 @@ function renderDocs(){
 function renderTier1(){
   const cols = state.contacts.map((c,i)=>`<th><span class="cname">${esc(firstName(c.name))}</span>${pillFor(c,i)}</th>`).join('');
   const rows = CATS.map(cat=>{
-    const cells = state.contacts.map(c=>{
+    const cells = state.contacts.map((c,i)=>{
       if(!hasEmail(c)) return `<td><span class="chip off">OFF</span><span class="why">no email address</span></td>`;
+      if(i!==0) return `<td><span class="chip off">OFF</span><span class="why">secondary contacts start off — any individual can be enabled in Caruso</span></td>`;
       const on = emailCatOn(cat.id);
       return `<td><span class="chip ${on?'on':'off'}">${on?'ON':'OFF'}</span><span class="why">${emailCatWhy(cat.id)}</span></td>`;
     }).join('');
@@ -333,10 +334,8 @@ function renderTier3(){
   const pac = state.contacts.map(()=>`<td><span class="chip lock">ON · LOCKED</span><span class="why">cannot be turned off</span></td>`).join('');
   const mkt = state.contacts.map(c=>{
     if(!hasEmail(c)) return `<td><span class="chip off">OFF</span><span class="why">no email address</span></td>`;
-    const m = state.docs.marketing;
-    if(m==='Email') return `<td><span class="chip on">ON</span><span class="why">Marketing = Email</span></td>`;
-    if(m==='Post') return `<td><span class="chip off">OFF</span><span class="why">Marketing = Post — on the postal list instead</span></td>`;
-    return `<td><span class="chip off">OFF</span><span class="why">opt-out preserved</span></td>`;
+    const why = state.docs.marketing==='Post' ? 'on for all contacts at migration — postal marketing also elected (postal list)' : 'on for all contacts at migration';
+    return `<td><span class="chip on">ON</span><span class="why">${why}</span></td>`;
   }).join('');
   document.getElementById('tier3Body').innerHTML =
     `<table>
