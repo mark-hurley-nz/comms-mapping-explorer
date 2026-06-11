@@ -59,8 +59,8 @@
   .contact-row .who i{font-size:12px;color:var(--muted);font-style:normal;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .pill{font-size:10.5px;font-weight:600;letter-spacing:.4px;padding:3px 8px;border-radius:999px;white-space:nowrap}
   .pill.primary{background:var(--gold-bg);color:var(--gold)}
-  .pill.secondary{background:var(--lock-bg);color:var(--lock)}
-  .pill.placeholder{background:var(--off-bg);color:var(--off)}
+  .pill.secondary{background:#e3eefb;color:#2c64a8}
+  .pill.placeholder{background:#efe9f8;color:#6d4aa8}
   .mini{font-size:11.5px;border:1px solid var(--line);background:#fff;border-radius:7px;padding:4px 8px;cursor:pointer;color:var(--body);white-space:nowrap}
   .mini:hover{border-color:var(--accent);color:var(--accent)}
   .mini.danger:hover{border-color:var(--off);color:var(--off)}
@@ -91,8 +91,6 @@
   .chip.on{background:var(--on-bg);color:var(--on)}
   .chip.off{background:var(--off-bg);color:var(--off)}
   .chip.lock{background:var(--lock-bg);color:var(--lock)}
-  .chip.sel{background:var(--on-bg);color:var(--on)}
-  .chip.not{background:#f0f2f5;color:var(--muted)}
   .why{display:block;font-size:11px;color:var(--muted);margin-top:3px;max-width:200px}
   th .pill{display:inline-block;margin-left:5px}
   th .cname{display:block;font-size:12.5px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:650;margin-bottom:3px}
@@ -319,7 +317,7 @@ function renderTier2(){
   const rows = all.map(cat=>{
     const sel = postalSelected(cat.id);
     return `<tr><td class="cat">${cat.name}<span>${cat.desc}</span></td>
-      <td><span class="chip ${sel?'sel':'not'}">${sel?'SELECTED':'NOT SELECTED'}</span><span class="why">${postalWhy(cat.id)}</span></td></tr>`;
+      <td><span class="chip ${sel?'on':'off'}">${sel?'ON':'OFF'}</span><span class="why">${postalWhy(cat.id)}</span></td></tr>`;
   }).join('');
   document.getElementById('tier2Body').innerHTML =
     `<table><tr><th>Postal category</th><th>${esc(entityName())}</th></tr>${rows}</table>`;
