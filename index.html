@@ -23,8 +23,18 @@
   header p{color:#b9c6d4;margin-top:8px;max-width:860px;font-size:15px}
   header .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#e8eef4;font-size:12px;padding:3px 12px;border-radius:999px;margin-bottom:14px;letter-spacing:.4px}
 
-  main{max-width:1180px;margin:30px auto 0;padding:0 8px;display:grid;grid-template-columns:430px 1fr;gap:22px;align-items:start}
-  @media(max-width:980px){main{grid-template-columns:1fr}}
+  main{max-width:1220px;margin:30px auto 0;padding:0 8px;display:grid;grid-template-columns:420px 56px 1fr;gap:14px;align-items:start}
+  .flow{display:flex;flex-direction:column;align-items:center;align-self:stretch}
+  .flow-arrow{position:sticky;top:42vh;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .flow-arrow .circ{width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(15,31,51,.25)}
+  .flow-arrow .circ svg{display:block}
+  .flow-arrow .cap{font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:center}
+  @media(max-width:980px){
+    main{grid-template-columns:1fr}
+    .flow{flex-direction:row;justify-content:center;padding:4px 0}
+    .flow-arrow{position:static;flex-direction:row}
+    .flow-arrow .circ{transform:rotate(90deg)}
+  }
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
   .card-h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:8px}
@@ -134,6 +144,16 @@
     <div class="card" id="cardDocs">
       <div class="card-h"><h2>Communication settings</h2><span class="sub">one setting per document type</span></div>
       <div class="card-b" id="docSettings"></div>
+    </div>
+  </div>
+
+  <!-- MAPPING ARROW -->
+  <div class="flow" aria-hidden="true">
+    <div class="flow-arrow">
+      <div class="circ">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg>
+      </div>
+      <div class="cap">maps<br>to</div>
     </div>
   </div>
 
