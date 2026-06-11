@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Communications — Boardroom → Caruso Mapping Explorer</title>
+<style>
+  :root{
+    --navy:#0f1f33; --navy-2:#16293f; --ink:#1c2b3a; --body:#3d4f63; --muted:#7b8a9b;
+    --line:#e3e9f0; --bg:#f4f6f9; --card:#ffffff;
+    --accent:#0e7a6c; --accent-soft:#e3f3f0;
+    --on:#0e7a6c; --on-bg:#e3f3f0; --off:#a04545; --off-bg:#f9ecec;
+    --lock:#5b6c80; --lock-bg:#eef1f5;
+    --gold:#b98a2f; --gold-bg:#faf3e3;
+    --hl:#fff8e6; --hl-line:#e8c878;
+    --r:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--body);line-height:1.5;padding-bottom:64px}
+  header{background:var(--navy);color:#fff;padding:34px 28px 30px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 8px}
+  header h1{font-size:24px;font-weight:650;letter-spacing:.2px;color:#fff}
+  header p{color:#b9c6d4;margin-top:8px;max-width:860px;font-size:15px}
+  header .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#e8eef4;font-size:12px;padding:3px 12px;border-radius:999px;margin-bottom:14px;letter-spacing:.4px}
+
+  main{max-width:1180px;margin:30px auto 0;padding:0 8px;display:grid;grid-template-columns:430px 1fr;gap:22px;align-items:start}
+  @media(max-width:980px){main{grid-template-columns:1fr}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .card-h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .card-h h2{font-size:15px;color:var(--ink);font-weight:650}
+  .card-h .sub{font-size:12px;color:var(--muted)}
+  .card-b{padding:16px 18px}
+
+  .side-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:2px 0 10px;font-weight:600}
+
+  /* presets */
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .presets button{font-size:12.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--body);cursor:pointer}
+  .presets button:hover{border-color:var(--accent);color:var(--accent)}
+
+  input[type=text]{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;color:var(--ink)}
+  input[type=text]:focus{outline:none;border-color:var(--accent)}
+  label.fld{display:block;font-size:12px;color:var(--muted);margin:0 0 4px}
+
+  .contact-row{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:8px;background:#fbfcfe}
+  .contact-row .who{flex:1;min-width:0}
+  .contact-row .who b{font-size:13.5px;color:var(--ink);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .contact-row .who i{font-size:12px;color:var(--muted);font-style:normal;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pill{font-size:10.5px;font-weight:600;letter-spacing:.4px;padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .pill.primary{background:var(--gold-bg);color:var(--gold)}
+  .pill.secondary{background:var(--lock-bg);color:var(--lock)}
+  .pill.placeholder{background:var(--off-bg);color:var(--off)}
+  .mini{font-size:11.5px;border:1px solid var(--line);background:#fff;border-radius:7px;padding:4px 8px;cursor:pointer;color:var(--body);white-space:nowrap}
+  .mini:hover{border-color:var(--accent);color:var(--accent)}
+  .mini.danger:hover{border-color:var(--off);color:var(--off)}
+
+  .add-contact{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:10px}
+  .add-contact button{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer}
+  .add-contact button:hover{background:var(--navy-2)}
+
+  .doc-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .doc-row:last-child{border-bottom:none}
+  .doc-row .dl b{font-size:13.5px;color:var(--ink)}
+  .doc-row .dl span{display:block;font-size:11.5px;color:var(--muted)}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;flex-shrink:0}
+  .seg button{border:none;background:#fff;padding:7px 13px;font-size:12.5px;cursor:pointer;color:var(--body);border-right:1px solid var(--line)}
+  .seg button:last-child{border-right:none}
+  .seg button.sel{background:var(--navy);color:#fff;font-weight:600}
+
+  /* result tiers */
+  .tier{margin-bottom:20px}
+  .tier .card-h h2 .tno{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:6px;font-size:11px;font-weight:700;padding:2px 7px;margin-right:9px;vertical-align:1px;letter-spacing:.3px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;font-size:11.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:bottom}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.cat{color:var(--ink);font-weight:600;font-size:13px;white-space:nowrap}
+  td.cat span{display:block;font-weight:400;font-size:11px;color:var(--muted);white-space:normal}
+  .chip{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.4px;padding:3px 10px;border-radius:999px}
+  .chip.on{background:var(--on-bg);color:var(--on)}
+  .chip.off{background:var(--off-bg);color:var(--off)}
+  .chip.lock{background:var(--lock-bg);color:var(--lock)}
+  .chip.sel{background:var(--on-bg);color:var(--on)}
+  .chip.not{background:#f0f2f5;color:var(--muted)}
+  .why{display:block;font-size:11px;color:var(--muted);margin-top:3px;max-width:200px}
+  th .pill{display:inline-block;margin-left:5px}
+  th .cname{display:block;font-size:12.5px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:650;margin-bottom:3px}
+
+  .postal-note,.tier-note{font-size:12px;color:var(--muted);padding:10px 18px;border-top:1px solid var(--line);background:#fbfcfe}
+  .single-copy{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--body);background:var(--accent-soft);border:1px solid #cfe7e2;border-radius:8px;padding:8px 12px;margin:0 18px 14px}
+  .single-copy b{color:var(--accent)}
+
+  footer{max-width:1180px;margin:34px auto 0;padding:0 16px;font-size:12px;color:var(--muted)}
+  footer p{margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="tag">CHARTER HALL × CARUSO</div>
+    <h1>Investor Communications — Mapping Explorer</h1>
+    <p>Set up an investing entity as it looks in Boardroom today, and see exactly how it maps into Caruso's three preference lists. Everything updates live, using the same rules as the <i>Investor Communications Approach V2.0</i> paper.</p>
+  </div>
+</header>
+
+<main>
+  <!-- LEFT: Boardroom today -->
+  <div>
+    <div class="side-label">Your entity in Boardroom today</div>
+    <div class="presets">
+      <button onclick="loadPreset('hampton')">Example: Hampton Family Trust</button>
+      <button onclick="loadPreset('postonly')">Post-only investor</button>
+      <button onclick="loadPreset('emailall')">Email everything</button>
+      <button onclick="loadPreset('optout')">Opt-outs</button>
+    </div>
+
+    <div class="card" id="cardContacts" style="margin-bottom:18px">
+      <div class="card-h"><h2>Contacts</h2><span class="sub">first-listed = primary</span></div>
+      <div class="card-b">
+        <label class="fld">Investing entity name</label>
+        <input type="text" id="entityName" value="Hampton Family Trust" oninput="render()">
+        <div style="height:14px"></div>
+        <div id="contactList"></div>
+        <div class="add-contact">
+          <input type="text" id="ncName" placeholder="Contact name">
+          <input type="text" id="ncEmail" placeholder="Email (leave blank if none)">
+          <button onclick="addContact()">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="cardDocs">
+      <div class="card-h"><h2>Communication settings</h2><span class="sub">one setting per document type</span></div>
+      <div class="card-b" id="docSettings"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Caruso -->
+  <div>
+    <div class="side-label">How it looks in Caruso</div>
+
+    <div class="card tier" id="tier1">
+      <div class="card-h">
+        <h2><span class="tno">LIST 1</span>Investing Entity ↔ Contact email lists</h2>
+        <span class="sub">held per contact, per entity</span>
+      </div>
+      <div class="card-b" style="overflow-x:auto" id="tier1Body"></div>
+      <div class="tier-note">Each contact's own selection of the four email categories for this entity. Contacts migrated with a placeholder email have every category off — nothing is ever sent to a placeholder address.</div>
+    </div>
+
+    <div class="card tier" id="tier2">
+      <div class="card-h">
+        <h2><span class="tno">LIST 2</span>Investing Entity postal list</h2>
+        <span class="sub">one election per entity — five categories</span>
+      </div>
+      <div class="card-b" id="tier2Body"></div>
+      <div class="single-copy" id="postalCopyNote"></div>
+      <div class="tier-note">Post is recorded once on the entity, so there is a single postal election and a single physical copy of each mailing — no duplicate letters. Marketing is a post-only category here.</div>
+    </div>
+
+    <div class="card tier" id="tier3">
+      <div class="card-h">
+        <h2><span class="tno">LIST 3</span>Contact email lists</h2>
+        <span class="sub">held on the person, across all their entities</span>
+      </div>
+      <div class="card-b" style="overflow-x:auto" id="tier3Body"></div>
+      <div class="tier-note">Portal Access &amp; Compliance is locked on for everyone — password resets, security and AML/KYC notices cannot be turned off. Marketing is toggleable, and investors can unsubscribe themselves in one click from any marketing email.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>This explorer mirrors the migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i>. The result on day one mirrors Boardroom: everyone keeps the emails they receive today, each entity keeps its single postal copy, and every Annual Report and Marketing opt-out is preserved.</p>
+  <p>Categories: Orders &amp; Holding Movements · Distributions · Holding &amp; Tax Statements · Updates &amp; Reports (+ Marketing, post-only, on the postal list).</p>
+</footer>
+
+<script>
+// ---------- model ----------
+const CATS = [
+  {id:'ohm', name:'Orders & Holding Movements', desc:'subscriptions, transfers, redemptions, capital calls'},
+  {id:'dist', name:'Distributions', desc:'distribution statements and adjustments'},
+  {id:'hts', name:'Holding & Tax Statements', desc:'periodic financial and tax statements'},
+  {id:'upd', name:'Updates & Reports', desc:'fund documents, updates, reports'}
+];
+const DOCS = [
+  {id:'advices', label:'Advices / Statements', sub:'mandatory — Email or Post', options:['Email','Post'], cats:['ohm','hts']},
+  {id:'notices', label:'Notices', sub:'mandatory — Email or Post', options:['Email','Post'], cats:['dist','ohm']},
+  {id:'annual', label:'Annual Report', sub:'can be opted out', options:['Email','Post','Off'], cats:['upd']},
+  {id:'marketing', label:'Marketing', sub:'can be opted out', options:['Email','Post','Off'], cats:[]}
+];
+
+let state = null;
+const PRESETS = {
+  hampton: {
+    entity:'Hampton Family Trust',
+    contacts:[
+      {name:'Jane Hampton', email:'jane@example.com'},
+      {name:'John Hampton', email:'john@example.com'},
+      {name:'Margaret Hampton', email:''}
+    ],
+    docs:{advices:'Email', notices:'Email', annual:'Post', marketing:'Off'}
+  },
+  postonly: {
+    entity:'Riverside Pension Fund',
+    contacts:[{name:'Alan Wright', email:'alan@example.com'},{name:'Priya Nair', email:'priya@example.com'}],
+    docs:{advices:'Post', notices:'Post', annual:'Post', marketing:'Post'}
+  },
+  emailall: {
+    entity:'Birch Lane Investments',
+    contacts:[{name:'Sam Carter', email:'sam@example.com'},{name:'Lee Wong', email:'lee@example.com'}],
+    docs:{advices:'Email', notices:'Email', annual:'Email', marketing:'Email'}
+  },
+  optout: {
+    entity:'Kowhai Holdings',
+    contacts:[{name:'Tina Brooks', email:'tina@example.com'},{name:'Noah Reed', email:''}],
+    docs:{advices:'Email', notices:'Email', annual:'Off', marketing:'Off'}
+  }
+};
+
+function loadPreset(key){
+  const p = PRESETS[key];
+  state = JSON.parse(JSON.stringify(p));
+  document.getElementById('entityName').value = state.entity;
+  render();
+}
+
+// ---------- mapping rules (mirrors the paper) ----------
+function emailCatOn(catId){
+  // a category is emailed if any contributing document type is set to Email
+  return DOCS.some(d => d.cats.includes(catId) && state.docs[d.id] === 'Email');
+}
+function emailCatWhy(catId){
+  const on = DOCS.filter(d => d.cats.includes(catId) && state.docs[d.id]==='Email').map(d=>d.label);
+  if(on.length) return 'via ' + on.join(' + ') + ' = Email';
+  const post = DOCS.filter(d => d.cats.includes(catId) && state.docs[d.id]==='Post').map(d=>d.label);
+  if(post.length) return post.join(' + ') + ' = Post — delivered by post instead';
+  return DOCS.filter(d=>d.cats.includes(catId)).map(d=>d.label).join(' + ') + ' = Off';
+}
+function postalSelected(catId){
+  if(catId==='mkt') return state.docs.marketing==='Post';
+  return DOCS.some(d => d.cats.includes(catId) && state.docs[d.id] === 'Post');
+}
+function postalWhy(catId){
+  if(catId==='mkt') return state.docs.marketing==='Post' ? 'Marketing = Post' : (state.docs.marketing==='Email' ? 'Marketing = Email — sent by email' : 'Marketing = Off');
+  const post = DOCS.filter(d => d.cats.includes(catId) && state.docs[d.id]==='Post').map(d=>d.label);
+  if(post.length) return 'via ' + post.join(' + ') + ' = Post';
+  return 'no document type for this category is set to Post';
+}
+function hasEmail(c){ return c.email && c.email.trim().length > 0; }
+
+// ---------- rendering ----------
+function pillFor(c, idx){
+  if(!hasEmail(c)) return '<span class="pill placeholder">PLACEHOLDER EMAIL</span>';
+  return idx===0 ? '<span class="pill primary">KEY ACCOUNT</span>' : '<span class="pill secondary">SECONDARY</span>';
+}
+
+function renderContacts(){
+  const el = document.getElementById('contactList');
+  el.innerHTML = state.contacts.map((c,i)=>`
+    <div class="contact-row">
+      <div class="who">
+        <b>${esc(c.name)}</b>
+        <i>${hasEmail(c) ? esc(c.email) : 'no email address — placeholder created in Caruso'}</i>
+      </div>
+      ${pillFor(c,i)}
+      ${i!==0 ? `<button class="mini" onclick="makePrimary(${i})">Make primary</button>` : ''}
+      <button class="mini danger" onclick="removeContact(${i})">✕</button>
+    </div>`).join('');
+}
+
+function renderDocs(){
+  const el = document.getElementById('docSettings');
+  el.innerHTML = DOCS.map(d=>`
+    <div class="doc-row">
+      <div class="dl"><b>${d.label}</b><span>${d.sub}</span></div>
+      <div class="seg">${d.options.map(o=>`<button class="${state.docs[d.id]===o?'sel':''}" onclick="setDoc('${d.id}','${o}')">${o}</button>`).join('')}</div>
+    </div>`).join('');
+}
+
+function renderTier1(){
+  const cols = state.contacts.map((c,i)=>`<th><span class="cname">${esc(firstName(c.name))}</span>${pillFor(c,i)}</th>`).join('');
+  const rows = CATS.map(cat=>{
+    const cells = state.contacts.map(c=>{
+      if(!hasEmail(c)) return `<td><span class="chip off">OFF</span><span class="why">no email address</span></td>`;
+      const on = emailCatOn(cat.id);
+      return `<td><span class="chip ${on?'on':'off'}">${on?'ON':'OFF'}</span><span class="why">${emailCatWhy(cat.id)}</span></td>`;
+    }).join('');
+    return `<tr><td class="cat">${cat.name}<span>${cat.desc}</span></td>${cells}</tr>`;
+  }).join('');
+  document.getElementById('tier1Body').innerHTML =
+    `<table><tr><th>Email category</th>${cols}</tr>${rows}</table>`;
+}
+
+function renderTier2(){
+  const all = [...CATS, {id:'mkt', name:'Marketing', desc:'postal marketing material — post-only category'}];
+  const rows = all.map(cat=>{
+    const sel = postalSelected(cat.id);
+    return `<tr><td class="cat">${cat.name}<span>${cat.desc}</span></td>
+      <td><span class="chip ${sel?'sel':'not'}">${sel?'SELECTED':'NOT SELECTED'}</span><span class="why">${postalWhy(cat.id)}</span></td></tr>`;
+  }).join('');
+  document.getElementById('tier2Body').innerHTML =
+    `<table><tr><th>Postal category</th><th>${esc(entityName())}</th></tr>${rows}</table>`;
+  const anyPost = all.some(c=>postalSelected(c.id));
+  document.getElementById('postalCopyNote').innerHTML = anyPost
+    ? `📮 <span><b>One physical copy</b> of each elected mailing goes to ${esc(entityName())}'s postal address — never one per contact.</span>`
+    : `📮 <span>No postal elections — ${esc(entityName())} receives nothing by post.</span>`;
+}
+
+function renderTier3(){
+  const cols = state.contacts.map((c,i)=>`<th><span class="cname">${esc(firstName(c.name))}</span>${pillFor(c,i)}</th>`).join('');
+  const pac = state.contacts.map(()=>`<td><span class="chip lock">ON · LOCKED</span><span class="why">cannot be turned off</span></td>`).join('');
+  const mkt = state.contacts.map(c=>{
+    if(!hasEmail(c)) return `<td><span class="chip off">OFF</span><span class="why">no email address</span></td>`;
+    const m = state.docs.marketing;
+    if(m==='Email') return `<td><span class="chip on">ON</span><span class="why">Marketing = Email</span></td>`;
+    if(m==='Post') return `<td><span class="chip off">OFF</span><span class="why">Marketing = Post — on the postal list instead</span></td>`;
+    return `<td><span class="chip off">OFF</span><span class="why">opt-out preserved</span></td>`;
+  }).join('');
+  document.getElementById('tier3Body').innerHTML =
+    `<table>
+      <tr><th>Email list</th>${cols}</tr>
+      <tr><td class="cat">Portal Access &amp; Compliance<span>password resets, security, AML/KYC</span></td>${pac}</tr>
+      <tr><td class="cat">Marketing<span>campaigns, newsletters, announcements</span></td>${mkt}</tr>
+    </table>`;
+}
+
+function render(){
+  state.entity = document.getElementById('entityName').value;
+  renderContacts(); renderDocs(); renderTier1(); renderTier2(); renderTier3();
+}
+
+// ---------- interactions ----------
+function setDoc(id, val){ state.docs[id]=val; render(); }
+function addContact(){
+  const n = document.getElementById('ncName').value.trim();
+  if(!n) return;
+  state.contacts.push({name:n, email:document.getElementById('ncEmail').value.trim()});
+  document.getElementById('ncName').value=''; document.getElementById('ncEmail').value='';
+  render();
+}
+function removeContact(i){ if(state.contacts.length>1){ state.contacts.splice(i,1); render(); } }
+function makePrimary(i){ const c = state.contacts.splice(i,1)[0]; state.contacts.unshift(c); render(); }
+
+// ---------- utils ----------
+function esc(s){ return (s||'').replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function firstName(n){ return (n||'').split(' ')[0] || n; }
+function entityName(){ return state.entity && state.entity.trim() ? state.entity.trim() : 'this entity'; }
+
+loadPreset('hampton');
+</script>
+</body>
+</html>
