@@ -177,7 +177,7 @@
         <span class="sub">held per contact, per entity</span>
       </div>
       <div class="card-b" style="overflow-x:auto" id="tier1Body"></div>
-      <div class="tier-note">Email lists are mapped onto the primary contact (key account) only — secondary contacts start with every category off, and the registry team can switch any individual on at any time. Contacts without an email address are not migrated, unless the entity has no email addresses at all (Group B), in which case a single placeholder-email account is created as the key account.</div>
+      <div class="tier-note">Primary and secondary contacts are treated exactly the same — every migrated contact receives the same email settings. Contacts without an email address are not migrated, unless the entity has no email addresses at all (Group B), in which case a single placeholder-email account is created as the key account.</div>
     </div>
 
     <div class="card tier" id="tier2">
@@ -202,7 +202,7 @@
 </main>
 
 <footer>
-  <p>This explorer mirrors the confirmed migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i> (working group, 11–12 June 2026). Email lists are mapped to the key account only; secondary contacts start off; marketing email is off for everyone at migration; post mirrors your POST sheet — a single physical copy per entity.</p>
+  <p>This explorer mirrors the confirmed migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i> (working group, 11–12 June 2026). Primary and secondary contacts are treated exactly the same; marketing email is off for everyone at migration; post mirrors your POST sheet — a single physical copy per entity.</p>
   <p>Register: 12,169 EMAIL-sheet entities · 66 POST-sheet entities with an email · 1,902 POST-sheet entities with no email · 140 entities out of scope.</p>
 </footer>
 
@@ -223,7 +223,7 @@ const GROUPS = {
      acct:'One placeholder-email account is created as the key account — an entity cannot exist without an account, and nothing is ever sent to a placeholder address. Mandatory categories arrive by post; the annual report is no longer received (confirmed).'},
   C:{title:'Group C — EMAIL sheet', count:'12,169 entities',
      cond:'Not in the POST sheet.',
-     acct:'Accounts are created for each email address; contacts without an email address are not migrated. Everything is delivered by email to the key account; nothing by post.'}
+     acct:'Accounts are created for each email address; contacts without an email address are not migrated. Everything is delivered by email to every contact; nothing by post.'}
 };
 
 let state = null;
@@ -264,7 +264,7 @@ function migrated(){
   if(withEmail.length) return withEmail.map((c,i)=>({name:c.name, email:c.email, role: i===0?'primary':'secondary'}));
   return [{name:'Placeholder account', email:'placeholder', role:'placeholder'}];
 }
-function emailListOn(role, group){ return group==='C' && role==='primary'; }
+function emailListOn(role, group){ return group==='C' && role!=='placeholder'; }
 function postalOn(catId, group){
   if(group==='A') return true;                       // all five, incl. marketing
   if(group==='B') return ['ohm','dist','hts'].includes(catId);
@@ -322,9 +322,8 @@ function renderTier1(){
   const rows = CATS.map(cat=>{
     const cells = ms.map(m=>{
       if(m.role==='placeholder') return `<td><span class="chip off">OFF</span><span class="why">placeholder account — nothing is ever sent to it</span></td>`;
-      if(m.role==='secondary') return `<td><span class="chip off">OFF</span><span class="why">secondary contacts start off — enable any individual at any time</span></td>`;
       const on = emailListOn(m.role, g);
-      const why = on ? 'mapped to the key account from your EMAIL sheet' : 'Group ' + g + ' — delivery is by post';
+      const why = on ? 'EMAIL sheet — all contacts treated the same' : 'Group ' + g + ' — delivery is by post';
       return `<td><span class="chip ${on?'on':'off'}">${on?'ON':'OFF'}</span><span class="why">${why}</span></td>`;
     }).join('');
     return `<tr><td class="cat">${cat.name}<span>${cat.desc}</span></td>${cells}</tr>`;
