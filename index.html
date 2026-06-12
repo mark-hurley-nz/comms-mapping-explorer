@@ -12,15 +12,14 @@
     --on:#0e7a6c; --on-bg:#e3f3f0; --off:#a04545; --off-bg:#f9ecec;
     --lock:#5b6c80; --lock-bg:#eef1f5;
     --gold:#b98a2f; --gold-bg:#faf3e3;
-    --hl:#fff8e6; --hl-line:#e8c878;
     --r:12px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--body);line-height:1.5;padding-bottom:64px}
   header{background:var(--navy);color:#fff;padding:34px 28px 30px}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 8px}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 8px}
   header h1{font-size:24px;font-weight:650;letter-spacing:.2px;color:#fff}
-  header p{color:#b9c6d4;margin-top:8px;max-width:860px;font-size:15px}
+  header p{color:#b9c6d4;margin-top:8px;max-width:880px;font-size:15px}
   header .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#e8eef4;font-size:12px;padding:3px 12px;border-radius:999px;margin-bottom:14px;letter-spacing:.4px}
 
   main{max-width:1220px;margin:30px auto 0;padding:0 8px;display:grid;grid-template-columns:420px 56px 1fr;gap:14px;align-items:start}
@@ -44,7 +43,6 @@
 
   .side-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:2px 0 10px;font-weight:600}
 
-  /* presets */
   .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
   .presets button{font-size:12.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--body);cursor:pointer}
   .presets button:hover{border-color:var(--accent);color:var(--accent)}
@@ -52,6 +50,13 @@
   input[type=text]{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;color:var(--ink)}
   input[type=text]:focus{outline:none;border-color:var(--accent)}
   label.fld{display:block;font-size:12px;color:var(--muted);margin:0 0 4px}
+
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{border:none;background:#fff;padding:8px 16px;font-size:13px;cursor:pointer;color:var(--body);border-right:1px solid var(--line)}
+  .seg button:last-child{border-right:none}
+  .seg button.sel{background:var(--navy);color:#fff;font-weight:600}
+  .sheet-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .sheet-note{font-size:12px;color:var(--muted)}
 
   .contact-row{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:8px;background:#fbfcfe}
   .contact-row .who{flex:1;min-width:0}
@@ -61,6 +66,7 @@
   .pill.primary{background:var(--gold-bg);color:var(--gold)}
   .pill.secondary{background:#e3eefb;color:#2c64a8}
   .pill.placeholder{background:#efe9f8;color:#6d4aa8}
+  .pill.skip{background:#fdf0e3;color:#b06419}
   .mini{font-size:11.5px;border:1px solid var(--line);background:#fff;border-radius:7px;padding:4px 8px;cursor:pointer;color:var(--body);white-space:nowrap}
   .mini:hover{border-color:var(--accent);color:var(--accent)}
   .mini.danger:hover{border-color:var(--off);color:var(--off)}
@@ -69,16 +75,13 @@
   .add-contact button{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer}
   .add-contact button:hover{background:var(--navy-2)}
 
-  .doc-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
-  .doc-row:last-child{border-bottom:none}
-  .doc-row .dl b{font-size:13.5px;color:var(--ink)}
-  .doc-row .dl span{display:block;font-size:11.5px;color:var(--muted)}
-  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;flex-shrink:0}
-  .seg button{border:none;background:#fff;padding:7px 13px;font-size:12.5px;cursor:pointer;color:var(--body);border-right:1px solid var(--line)}
-  .seg button:last-child{border-right:none}
-  .seg button.sel{background:var(--navy);color:#fff;font-weight:600}
+  /* group banner */
+  .group-banner{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px 18px;margin-bottom:18px}
+  .group-banner .gtag{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;letter-spacing:.6px;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+  .group-banner h3{font-size:16px;font-weight:650;color:#fff}
+  .group-banner p{font-size:12.5px;color:#b9c6d4;margin-top:5px}
+  .group-banner .warn{color:#ffd9a8}
 
-  /* result tiers */
   .tier{margin-bottom:20px}
   .tier .card-h h2 .tno{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:6px;font-size:11px;font-weight:700;padding:2px 7px;margin-right:9px;vertical-align:1px;letter-spacing:.3px}
   table{width:100%;border-collapse:collapse;font-size:13px}
@@ -91,15 +94,15 @@
   .chip.on{background:var(--on-bg);color:var(--on)}
   .chip.off{background:var(--off-bg);color:var(--off)}
   .chip.lock{background:var(--lock-bg);color:var(--lock)}
-  .why{display:block;font-size:11px;color:var(--muted);margin-top:3px;max-width:200px}
+  .why{display:block;font-size:11px;color:var(--muted);margin-top:3px;max-width:220px}
   th .pill{display:inline-block;margin-left:5px}
   th .cname{display:block;font-size:12.5px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:650;margin-bottom:3px}
 
-  .postal-note,.tier-note{font-size:12px;color:var(--muted);padding:10px 18px;border-top:1px solid var(--line);background:#fbfcfe}
+  .tier-note{font-size:12px;color:var(--muted);padding:10px 18px;border-top:1px solid var(--line);background:#fbfcfe}
   .single-copy{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--body);background:var(--accent-soft);border:1px solid #cfe7e2;border-radius:8px;padding:8px 12px;margin:0 18px 14px}
   .single-copy b{color:var(--accent)}
 
-  footer{max-width:1180px;margin:34px auto 0;padding:0 16px;font-size:12px;color:var(--muted)}
+  footer{max-width:1220px;margin:34px auto 0;padding:0 16px;font-size:12px;color:var(--muted)}
   footer p{margin-bottom:4px}
 </style>
 </head>
@@ -109,23 +112,35 @@
   <div class="wrap">
     <div class="tag">CHARTER HALL × CARUSO</div>
     <h1>Investor Communications — Mapping Explorer</h1>
-    <p>Set up an investing entity as it looks in Boardroom today, and see exactly how it maps into Caruso's three preference lists. Everything updates live, using the same rules as the <i>Investor Communications Approach V2.0</i> paper.</p>
+    <p>Set up an investing entity as it appears in your migration extracts — choose its sheet and add its contacts — and see exactly how it lands across Caruso's three preference lists, using the mapping rules confirmed by the working group (11–12 June 2026).</p>
   </div>
 </header>
 
 <main>
   <!-- LEFT: Boardroom today -->
   <div>
-    <div class="side-label">Your entity in Boardroom today</div>
+    <div class="side-label">Your entity in the migration extracts</div>
     <div class="presets">
-      <button onclick="loadPreset('hampton')">Example: Hampton Family Trust</button>
-      <button onclick="loadPreset('postonly')">Post-only investor</button>
-      <button onclick="loadPreset('emailall')">Email everything</button>
-      <button onclick="loadPreset('optout')">Opt-outs</button>
+      <button onclick="loadPreset('groupC')">Group C example — email investor</button>
+      <button onclick="loadPreset('groupA')">Group A example — post, with email</button>
+      <button onclick="loadPreset('groupB')">Group B example — post, no email</button>
     </div>
 
-    <div class="card" id="cardContacts" style="margin-bottom:18px">
-      <div class="card-h"><h2>Contacts</h2><span class="sub">first-listed = primary</span></div>
+    <div class="card" style="margin-bottom:18px">
+      <div class="card-h"><h2>Source sheet</h2><span class="sub">which extract is the entity in?</span></div>
+      <div class="card-b">
+        <div class="sheet-row">
+          <div class="seg" id="sheetSeg">
+            <button data-sheet="EMAIL">EMAIL sheet</button>
+            <button data-sheet="POST">POST sheet</button>
+          </div>
+          <span class="sheet-note" id="sheetNote"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><h2>Contacts</h2><span class="sub">first contact with an email = key account</span></div>
       <div class="card-b">
         <label class="fld">Investing entity name</label>
         <input type="text" id="entityName" value="Hampton Family Trust" oninput="render()">
@@ -137,11 +152,6 @@
           <button onclick="addContact()">Add</button>
         </div>
       </div>
-    </div>
-
-    <div class="card" id="cardDocs">
-      <div class="card-h"><h2>Communication settings</h2><span class="sub">one setting per document type</span></div>
-      <div class="card-b" id="docSettings"></div>
     </div>
   </div>
 
@@ -159,13 +169,15 @@
   <div>
     <div class="side-label">How it looks in Caruso</div>
 
+    <div class="group-banner" id="groupBanner"></div>
+
     <div class="card tier" id="tier1">
       <div class="card-h">
         <h2><span class="tno">LIST 1</span>Investing Entity ↔ Contact email lists</h2>
         <span class="sub">held per contact, per entity</span>
       </div>
       <div class="card-b" style="overflow-x:auto" id="tier1Body"></div>
-      <div class="tier-note">Boardroom settings are mapped onto the primary contact only — secondary contacts start with every category off, and the registry team can switch any individual on at any time. Placeholder-email contacts are always off.</div>
+      <div class="tier-note">Email lists are mapped onto the primary contact (key account) only — secondary contacts start with every category off, and the registry team can switch any individual on at any time. Contacts without an email address are not migrated, unless the entity has no email addresses at all (Group B), in which case a single placeholder-email account is created as the key account.</div>
     </div>
 
     <div class="card tier" id="tier2">
@@ -175,7 +187,7 @@
       </div>
       <div class="card-b" id="tier2Body"></div>
       <div class="single-copy" id="postalCopyNote"></div>
-      <div class="tier-note">Post is recorded once on the entity, so there is a single postal election and a single physical copy of each mailing — no duplicate letters. Marketing is a post-only category here.</div>
+      <div class="tier-note">Post is recorded once on the investing entity, so there is a single postal election and a single physical copy of each mailing — no duplicate letters. Marketing is a post-only category here.</div>
     </div>
 
     <div class="card tier" id="tier3">
@@ -184,14 +196,14 @@
         <span class="sub">held on the person, across all their entities</span>
       </div>
       <div class="card-b" style="overflow-x:auto" id="tier3Body"></div>
-      <div class="tier-note">Portal Access &amp; Compliance is locked on for everyone — password resets, security and AML/KYC notices cannot be turned off. The Marketing list follows the entity's Boardroom Marketing setting for the primary contact and starts off for secondary contacts; investors can unsubscribe themselves in one click from any marketing email.</div>
+      <div class="tier-note">Portal Access &amp; Compliance is locked on for everyone — password resets, security and AML/KYC notices cannot be turned off. Marketing email is off for every contact at migration; Group A entities receive marketing by post instead, and investors can be subscribed by your team at any time.</div>
     </div>
   </div>
 </main>
 
 <footer>
-  <p>This explorer mirrors the migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i>. On day one the primary contact's email mirrors Boardroom exactly — including every Annual Report and Marketing opt-out — secondary contacts start switched off (any individual can be enabled at any time), and post mirrors Boardroom exactly, a single copy per entity.</p>
-  <p>Categories: Orders &amp; Holding Movements · Distributions · Holding &amp; Tax Statements · Updates &amp; Reports (+ Marketing, post-only, on the postal list).</p>
+  <p>This explorer mirrors the confirmed migration rules in <i>Investor Communications Approach V2.0 — Charter Hall</i> (working group, 11–12 June 2026). Email lists are mapped to the key account only; secondary contacts start off; marketing email is off for everyone at migration; post mirrors your POST sheet — a single physical copy per entity.</p>
+  <p>Register: 12,169 EMAIL-sheet entities · 66 POST-sheet entities with an email · 1,902 POST-sheet entities with no email · 140 entities out of scope.</p>
 </footer>
 
 <script>
@@ -200,144 +212,161 @@ const CATS = [
   {id:'ohm', name:'Orders & Holding Movements', desc:'subscriptions, transfers, redemptions, capital calls'},
   {id:'dist', name:'Distributions', desc:'distribution statements and adjustments'},
   {id:'hts', name:'Holding & Tax Statements', desc:'periodic financial and tax statements'},
-  {id:'upd', name:'Updates & Reports', desc:'fund documents, updates, reports'}
+  {id:'upd', name:'Updates & Reports', desc:'fund documents, fund updates, reports'}
 ];
-const DOCS = [
-  {id:'advices', label:'Advices / Statements', sub:'mandatory — Email or Post', options:['Email','Post'], cats:['ohm','hts']},
-  {id:'notices', label:'Notices', sub:'mandatory — Email or Post', options:['Email','Post'], cats:['dist','ohm']},
-  {id:'annual', label:'Annual Report', sub:'can be opted out', options:['Email','Post','Off'], cats:['upd']},
-  {id:'marketing', label:'Marketing', sub:'can be opted out', options:['Email','Post','Off'], cats:[]}
-];
+const GROUPS = {
+  A:{title:'Group A — POST sheet, with an email address', count:'66 entities',
+     cond:'In the POST sheet with an email address (Advices/Statements = Post and Annual Report = Post).',
+     acct:'Accounts are created for each email address; contacts without an email address are not migrated. Everything is delivered by post — including marketing (confirmed 12 Jun).'},
+  B:{title:'Group B — POST sheet, no email address', count:'1,902 entities',
+     cond:'In the POST sheet, and the entity has no email address.',
+     acct:'One placeholder-email account is created as the key account — an entity cannot exist without an account, and nothing is ever sent to a placeholder address. Mandatory categories arrive by post; the annual report is no longer received (confirmed).'},
+  C:{title:'Group C — EMAIL sheet', count:'12,169 entities',
+     cond:'Not in the POST sheet.',
+     acct:'Accounts are created for each email address; contacts without an email address are not migrated. Everything is delivered by email to the key account; nothing by post.'}
+};
 
 let state = null;
 const PRESETS = {
-  hampton: {
-    entity:'Hampton Family Trust',
+  groupC: {
+    entity:'Hampton Family Trust', sheet:'EMAIL',
     contacts:[
       {name:'Jane Hampton', email:'jane@example.com'},
       {name:'John Hampton', email:'john@example.com'},
       {name:'Margaret Hampton', email:''}
-    ],
-    docs:{advices:'Email', notices:'Email', annual:'Post', marketing:'Off'}
+    ]
   },
-  postonly: {
-    entity:'Riverside Pension Fund',
-    contacts:[{name:'Alan Wright', email:'alan@example.com'},{name:'Priya Nair', email:'priya@example.com'}],
-    docs:{advices:'Post', notices:'Post', annual:'Post', marketing:'Post'}
+  groupA: {
+    entity:'Riverside Pension Fund', sheet:'POST',
+    contacts:[{name:'Alan Wright', email:'alan@example.com'},{name:'Priya Nair', email:'priya@example.com'}]
   },
-  emailall: {
-    entity:'Birch Lane Investments',
-    contacts:[{name:'Sam Carter', email:'sam@example.com'},{name:'Lee Wong', email:'lee@example.com'}],
-    docs:{advices:'Email', notices:'Email', annual:'Email', marketing:'Email'}
-  },
-  optout: {
-    entity:'Kowhai Holdings',
-    contacts:[{name:'Tina Brooks', email:'tina@example.com'},{name:'Noah Reed', email:''}],
-    docs:{advices:'Email', notices:'Email', annual:'Off', marketing:'Off'}
+  groupB: {
+    entity:'Birch Lane Estate', sheet:'POST',
+    contacts:[{name:'Edith Birch', email:''},{name:'Harold Birch', email:''}]
   }
 };
 
 function loadPreset(key){
-  const p = PRESETS[key];
-  state = JSON.parse(JSON.stringify(p));
+  state = JSON.parse(JSON.stringify(PRESETS[key]));
   document.getElementById('entityName').value = state.entity;
   render();
 }
 
-// ---------- mapping rules (mirrors the paper) ----------
-function emailCatOn(catId){
-  // a category is emailed if any contributing document type is set to Email
-  return DOCS.some(d => d.cats.includes(catId) && state.docs[d.id] === 'Email');
-}
-function emailCatWhy(catId){
-  const on = DOCS.filter(d => d.cats.includes(catId) && state.docs[d.id]==='Email').map(d=>d.label);
-  if(on.length) return 'via ' + on.join(' + ') + ' = Email';
-  const post = DOCS.filter(d => d.cats.includes(catId) && state.docs[d.id]==='Post').map(d=>d.label);
-  if(post.length) return post.join(' + ') + ' = Post — delivered by post instead';
-  return DOCS.filter(d=>d.cats.includes(catId)).map(d=>d.label).join(' + ') + ' = Off';
-}
-function postalSelected(catId){
-  if(catId==='mkt') return state.docs.marketing==='Post';
-  return DOCS.some(d => d.cats.includes(catId) && state.docs[d.id] === 'Post');
-}
-function postalWhy(catId){
-  if(catId==='mkt') return state.docs.marketing==='Post' ? 'Marketing = Post' : (state.docs.marketing==='Email' ? 'Marketing = Email — sent by email' : 'Marketing = Off');
-  const post = DOCS.filter(d => d.cats.includes(catId) && state.docs[d.id]==='Post').map(d=>d.label);
-  if(post.length) return 'via ' + post.join(' + ') + ' = Post';
-  return 'no document type for this category is set to Post';
-}
+// ---------- mapping rules (confirmed 11–12 Jun 2026) ----------
 function hasEmail(c){ return c.email && c.email.trim().length > 0; }
+function entityGroup(){
+  if(state.sheet === 'EMAIL') return 'C';
+  return state.contacts.some(hasEmail) ? 'A' : 'B';
+}
+// contacts that exist in Caruso after migration
+function migrated(){
+  const withEmail = state.contacts.filter(hasEmail);
+  if(withEmail.length) return withEmail.map((c,i)=>({name:c.name, email:c.email, role: i===0?'primary':'secondary'}));
+  return [{name:'Placeholder account', email:'placeholder', role:'placeholder'}];
+}
+function emailListOn(role, group){ return group==='C' && role==='primary'; }
+function postalOn(catId, group){
+  if(group==='A') return true;                       // all five, incl. marketing
+  if(group==='B') return ['ohm','dist','hts'].includes(catId);
+  return false;                                      // C: nothing by post
+}
 
 // ---------- rendering ----------
-function pillFor(c, idx){
-  if(!hasEmail(c)) return '<span class="pill placeholder">PLACEHOLDER EMAIL</span>';
-  return idx===0 ? '<span class="pill primary">KEY ACCOUNT</span>' : '<span class="pill secondary">SECONDARY</span>';
+function leftPill(c, i){
+  if(!hasEmail(c)){
+    return entityGroup()==='B'
+      ? '<span class="pill skip">NOT MIGRATED — PLACEHOLDER CREATED</span>'
+      : '<span class="pill skip">NOT MIGRATED</span>';
+  }
+  const firstEmailIdx = state.contacts.findIndex(hasEmail);
+  return i===firstEmailIdx ? '<span class="pill primary">KEY ACCOUNT</span>' : '<span class="pill secondary">SECONDARY</span>';
+}
+function colHead(m){
+  const pill = m.role==='primary' ? '<span class="pill primary">KEY ACCOUNT</span>'
+             : m.role==='secondary' ? '<span class="pill secondary">SECONDARY</span>'
+             : '<span class="pill placeholder">PLACEHOLDER EMAIL</span>';
+  return `<th><span class="cname">${esc(firstName(m.name))}</span>${pill}</th>`;
+}
+
+function renderSheet(){
+  document.querySelectorAll('#sheetSeg button').forEach(b=>b.classList.toggle('sel', b.dataset.sheet===state.sheet));
+  document.getElementById('sheetNote').textContent = state.sheet==='POST'
+    ? 'POST sheet — 1,968 entities elected post'
+    : 'EMAIL sheet — 12,169 entities';
 }
 
 function renderContacts(){
-  const el = document.getElementById('contactList');
-  el.innerHTML = state.contacts.map((c,i)=>`
+  document.getElementById('contactList').innerHTML = state.contacts.map((c,i)=>`
     <div class="contact-row">
       <div class="who">
         <b>${esc(c.name)}</b>
-        <i>${hasEmail(c) ? esc(c.email) : 'no email address — placeholder created in Caruso'}</i>
+        <i>${hasEmail(c) ? esc(c.email) : 'no email address'}</i>
       </div>
-      ${pillFor(c,i)}
-      ${i!==0 ? `<button class="mini" onclick="makePrimary(${i})">Make primary</button>` : ''}
+      ${leftPill(c,i)}
+      ${hasEmail(c) && i!==state.contacts.findIndex(hasEmail) ? `<button class="mini" onclick="makePrimary(${i})">Make primary</button>` : ''}
       <button class="mini danger" onclick="removeContact(${i})">✕</button>
     </div>`).join('');
 }
 
-function renderDocs(){
-  const el = document.getElementById('docSettings');
-  el.innerHTML = DOCS.map(d=>`
-    <div class="doc-row">
-      <div class="dl"><b>${d.label}</b><span>${d.sub}</span></div>
-      <div class="seg">${d.options.map(o=>`<button class="${state.docs[d.id]===o?'sel':''}" onclick="setDoc('${d.id}','${o}')">${o}</button>`).join('')}</div>
-    </div>`).join('');
+function renderBanner(){
+  const g = entityGroup(), info = GROUPS[g];
+  const warn = (state.sheet==='EMAIL' && !state.contacts.some(hasEmail))
+    ? '<p class="warn">⚠️ An EMAIL-sheet entity with no email addresses doesn\'t occur in your extracts — shown here with a placeholder account for completeness.</p>' : '';
+  document.getElementById('groupBanner').innerHTML =
+    `<span class="gtag">GROUP ${g} · ${info.count}</span><h3>${info.title}</h3><p>${info.cond}</p><p>${info.acct}</p>${warn}`;
 }
 
 function renderTier1(){
-  const cols = state.contacts.map((c,i)=>`<th><span class="cname">${esc(firstName(c.name))}</span>${pillFor(c,i)}</th>`).join('');
+  const g = entityGroup(), ms = migrated();
+  const cols = ms.map(colHead).join('');
   const rows = CATS.map(cat=>{
-    const cells = state.contacts.map((c,i)=>{
-      if(!hasEmail(c)) return `<td><span class="chip off">OFF</span><span class="why">no email address</span></td>`;
-      if(i!==0) return `<td><span class="chip off">OFF</span><span class="why">secondary contacts start off — any individual can be enabled in Caruso</span></td>`;
-      const on = emailCatOn(cat.id);
-      return `<td><span class="chip ${on?'on':'off'}">${on?'ON':'OFF'}</span><span class="why">${emailCatWhy(cat.id)}</span></td>`;
+    const cells = ms.map(m=>{
+      if(m.role==='placeholder') return `<td><span class="chip off">OFF</span><span class="why">placeholder account — nothing is ever sent to it</span></td>`;
+      if(m.role==='secondary') return `<td><span class="chip off">OFF</span><span class="why">secondary contacts start off — enable any individual at any time</span></td>`;
+      const on = emailListOn(m.role, g);
+      const why = on ? 'mapped to the key account from your EMAIL sheet' : 'Group ' + g + ' — delivery is by post';
+      return `<td><span class="chip ${on?'on':'off'}">${on?'ON':'OFF'}</span><span class="why">${why}</span></td>`;
     }).join('');
     return `<tr><td class="cat">${cat.name}<span>${cat.desc}</span></td>${cells}</tr>`;
   }).join('');
   document.getElementById('tier1Body').innerHTML =
-    `<table><tr><th>Email category</th>${cols}</tr>${rows}</table>`;
+    `<table><tr><th>Email list</th>${cols}</tr>${rows}</table>`;
 }
 
 function renderTier2(){
+  const g = entityGroup();
   const all = [...CATS, {id:'mkt', name:'Marketing', desc:'postal marketing material — post-only category'}];
+  const whyFor = (cat, on)=>{
+    if(g==='A') return cat.id==='mkt' ? 'confirmed 12 Jun — Group A receives marketing by post' : 'Group A — everything by post';
+    if(g==='B'){
+      if(on) return 'mandatory categories — by post';
+      return cat.id==='upd' ? 'confirmed — the annual report is no longer received' : 'no marketing for Group B';
+    }
+    return 'EMAIL sheet — nothing by post';
+  };
   const rows = all.map(cat=>{
-    const sel = postalSelected(cat.id);
+    const on = postalOn(cat.id, g);
     return `<tr><td class="cat">${cat.name}<span>${cat.desc}</span></td>
-      <td><span class="chip ${sel?'on':'off'}">${sel?'ON':'OFF'}</span><span class="why">${postalWhy(cat.id)}</span></td></tr>`;
+      <td><span class="chip ${on?'on':'off'}">${on?'ON':'OFF'}</span><span class="why">${whyFor(cat,on)}</span></td></tr>`;
   }).join('');
   document.getElementById('tier2Body').innerHTML =
     `<table><tr><th>Postal category</th><th>${esc(entityName())}</th></tr>${rows}</table>`;
-  const anyPost = all.some(c=>postalSelected(c.id));
+  const anyPost = all.some(c=>postalOn(c.id, g));
   document.getElementById('postalCopyNote').innerHTML = anyPost
     ? `📮 <span><b>One physical copy</b> of each elected mailing goes to ${esc(entityName())}'s postal address — never one per contact.</span>`
     : `📮 <span>No postal elections — ${esc(entityName())} receives nothing by post.</span>`;
 }
 
 function renderTier3(){
-  const cols = state.contacts.map((c,i)=>`<th><span class="cname">${esc(firstName(c.name))}</span>${pillFor(c,i)}</th>`).join('');
-  const pac = state.contacts.map(()=>`<td><span class="chip lock">ON · LOCKED</span><span class="why">cannot be turned off</span></td>`).join('');
-  const mkt = state.contacts.map((c,i)=>{
-    if(!hasEmail(c)) return `<td><span class="chip off">OFF</span><span class="why">no email address</span></td>`;
-    if(i!==0) return `<td><span class="chip off">OFF</span><span class="why">secondary contacts start off</span></td>`;
-    const m = state.docs.marketing;
-    if(m==='Email') return `<td><span class="chip on">ON</span><span class="why">Marketing = Email</span></td>`;
-    if(m==='Post') return `<td><span class="chip off">OFF</span><span class="why">Marketing = Post — on the postal list instead</span></td>`;
-    return `<td><span class="chip off">OFF</span><span class="why">opt-out preserved</span></td>`;
-  }).join('');
+  const g = entityGroup(), ms = migrated();
+  const cols = ms.map(colHead).join('');
+  const pac = ms.map(m=>m.role==='placeholder'
+    ? `<td><span class="chip lock">ON · LOCKED</span><span class="why">locked on — though nothing reaches a placeholder address</span></td>`
+    : `<td><span class="chip lock">ON · LOCKED</span><span class="why">cannot be turned off</span></td>`).join('');
+  const mktWhy = g==='A' ? 'confirmed — marketing email off for all of Group A; marketing arrives by post'
+              : g==='B' ? 'off — placeholder account'
+              : 'off at migration for every contact';
+  const mkt = ms.map(()=>`<td><span class="chip off">OFF</span><span class="why">${mktWhy}</span></td>`).join('');
   document.getElementById('tier3Body').innerHTML =
     `<table>
       <tr><th>Email list</th>${cols}</tr>
@@ -348,11 +377,14 @@ function renderTier3(){
 
 function render(){
   state.entity = document.getElementById('entityName').value;
-  renderContacts(); renderDocs(); renderTier1(); renderTier2(); renderTier3();
+  renderSheet(); renderContacts(); renderBanner(); renderTier1(); renderTier2(); renderTier3();
 }
 
 // ---------- interactions ----------
-function setDoc(id, val){ state.docs[id]=val; render(); }
+document.getElementById('sheetSeg').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  state.sheet = b.dataset.sheet; render();
+});
 function addContact(){
   const n = document.getElementById('ncName').value.trim();
   if(!n) return;
@@ -368,7 +400,7 @@ function esc(s){ return (s||'').replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','
 function firstName(n){ return (n||'').split(' ')[0] || n; }
 function entityName(){ return state.entity && state.entity.trim() ? state.entity.trim() : 'this entity'; }
 
-loadPreset('hampton');
+loadPreset('groupC');
 </script>
 </body>
 </html>
